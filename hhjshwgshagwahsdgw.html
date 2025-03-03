@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Trash Cats - Mod Announcement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project Trash Cats - Mod Announcement</h1>
+    <form id="modNotifyForm">
+        <label>Enter Discord User ID:</label>
+        <input type="text" id="discordUserID" placeholder="Enter User ID" required>
+        <button type="submit">Send Announcement</button>
+    </form>
+
+    <script>
+        document.getElementById('modNotifyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const discordUserID = document.getElementById('discordUserID').value;
+            const webhookURL = "https://discord.com/api/webhooks/1346207789382373407/Pny7nxdJzexibDLpNYjY7G_Q06--gxPoyn6KEl712b01HKMo0kH24aP6YjmtXQcHVJpK";  // Ersetze mit deinem Webhook-Link
+
+            const payload = {
+                content: `<@${discordUserID}> became a Mod in PTC! 🎉`
+            };
+
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (response.ok) {
+                    alert("Announcement sent successfully!");
+                } else {
+                    alert("Error sending announcement.");
+                }
+            }).catch(error => {
+                alert("Error sending announcement.");
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
